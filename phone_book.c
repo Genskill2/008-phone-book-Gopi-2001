@@ -247,11 +247,13 @@ int delete(FILE *db_file, char *name) {
 
       /* TBD */
       
-       p = NULL;;
-       p = p->next;
-      if(prev!=NULL){
+       if(strcmp(base->name, name) == 0){
+         base = p->next;
+       }
+      else{ p = p->next;
+      
        prev->next = p;
-      }
+          }
       
        deleted = 1;
        break;
