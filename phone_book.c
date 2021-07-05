@@ -62,13 +62,13 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
-    if(argc!=3){
+    if(argc != 3){
        print_usage("Improper arguments for search", argv[0]);
       exit(1);
     }/* TBD  */
     FILE *fp = open_db_file();
     char *name = argv[2];
-    if (search(fp, name)) {
+    if (!search(fp, name)) {
       printf("no match\n");
       fclose(fp);
       exit(1);
@@ -196,9 +196,10 @@ int search(FILE *db_file,char *name){
   while(p!=NULL){
   if(strcmp(p->name,name) == 0){
   printf("%s\n",p->phone);
-  p=p->next;
+ 
   found = 1;
   }
+   p=p->next;
   }
   free_entries(base);
   return found;
