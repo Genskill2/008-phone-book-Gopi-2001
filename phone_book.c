@@ -247,7 +247,9 @@ int delete(FILE *db_file, char *name) {
 
       /* TBD */
       if(count == 0){ //first element
-       p->next = NULL;
+       del = p;
+       p = p->next;
+       free_entries(del);
       }
      else{
        prev->next = p->next;
