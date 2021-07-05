@@ -247,12 +247,12 @@ int delete(FILE *db_file, char *name) {
 
       /* TBD */
       
-       del = p;
+       p = NULL;;
        p = p->next;
       if(prev!=NULL){
        prev->next = p;
       }
-       free_entries(del);
+      
        deleted = 1;
        break;
     }
