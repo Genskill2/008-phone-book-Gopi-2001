@@ -66,8 +66,8 @@ int main(int argc, char *argv[]) {
       printf("NOT IMPLEMENTED!\n"); 
     }/* TBD  */
      FILE *fp = open_db_file();
-   int num =  search(fp,argv[2]);
-    printf("%ld\n",num);
+   char *num =  search(fp,argv[2]);
+    printf("%s\n",*num);
     fclose(fp);
     exit(0); 
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
@@ -101,7 +101,7 @@ FILE *open_db_file() {
   
 void free_entries(entry *p) {
   /* TBD */
-  if(P!=null){
+  if(p!=null){
   free(p);
   }
   printf("Memory is not being freed. This needs to be fixed!\n");  
