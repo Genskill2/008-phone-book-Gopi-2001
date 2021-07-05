@@ -196,6 +196,7 @@ int search(FILE *db_file,char *name){
   while(p!=NULL){
   if(strcmp(p->name,name) == 0){
   printf("%s\n",p->phone);
+  p=p->next;
   found = 1;
   }
   }
