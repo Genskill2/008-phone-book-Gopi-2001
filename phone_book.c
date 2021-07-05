@@ -231,7 +231,7 @@ int delete(FILE *db_file, char *name) {
   entry *prev = NULL;
   entry *del = NULL ; /* Node to be deleted */
   int deleted = 0;
-  int count = 0;
+
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
       /* Matching node found. Delete it from the linked list.
@@ -246,14 +246,12 @@ int delete(FILE *db_file, char *name) {
       */
 
       /* TBD */
-      if(count == 0){ //first element
+      
        del = p;
        p = p->next;
+       prev->next = p;
+       del->next = NULL;
        free_entries(del);
-      }
-     else{
-       prev->next = p->next;
-      }
       deleted = 1;
       break;
     }
@@ -261,7 +259,7 @@ int delete(FILE *db_file, char *name) {
       prev = p;
       p = p->next;
     }
-    count++;
+   
   }
   write_all_entries(base);
   free_entries(base);
