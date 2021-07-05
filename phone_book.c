@@ -252,7 +252,7 @@ int delete(FILE *db_file, char *name) {
       if(prev!=NULL){
        prev->next = p;
       }
-       del = NULL;
+       free_entries(del);
        deleted = 1;
        break;
     }
