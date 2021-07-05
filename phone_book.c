@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
      FILE *fp = open_db_file();
     char *name = argv[2];
     char *s =  search(fp,name);
-    printf("%s\n",*s);
+    printf("%s\n",s);
     fclose(fp);
     exit(0); 
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
