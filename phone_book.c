@@ -66,8 +66,8 @@ int main(int argc, char *argv[]) {
       printf("NOT IMPLEMENTED!\n"); 
     }/* TBD  */
      FILE *fp = open_db_file();
-   char *num =  search(fp,argv[2]);
-    printf("%s\n",*num);
+   char[] s =  search(fp,argv[2]);
+    printf("%s\n",s);
     fclose(fp);
     exit(0); 
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
@@ -101,9 +101,9 @@ FILE *open_db_file() {
   
 void free_entries(entry *p) {
   /* TBD */
-  if(p!=null){
+ 
   free(p);
-  }
+  
   printf("Memory is not being freed. This needs to be fixed!\n");  
 }
 
@@ -187,7 +187,7 @@ void add(char *name, char *phone) {
 int search(FILE *db_file,char *name){
   entry *p = load_entries(db_file);
   entry *base = p;
-  while(p!=null){
+  while(p!=NULL){
   if(strcmp(p->name,name) == 0){
   printf("%s\n",p->phone);
   break;
@@ -202,7 +202,7 @@ void list(FILE *db_file) {
   int num = 0;
   while (p!=NULL) {
     printf("%-20s : %10s\n", p->name, p->phone);
-    num++:
+    num++;
     p=p->next;
   }
   /* TBD print total count */
@@ -235,7 +235,7 @@ int delete(FILE *db_file, char *name) {
       deleted = 1;
     }
     else{
-      p = p->.next;
+      p = p->next;
     }
   }
   write_all_entries(base);
