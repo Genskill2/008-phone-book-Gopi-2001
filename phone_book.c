@@ -205,10 +205,11 @@ int search(FILE *db_file,char *name){
   return found;
 }
 
+int num = 0;
 void list(FILE *db_file) {
   entry *p = load_entries(db_file);
   entry *base = p;
-  int num = 0;
+  
   while (p!=NULL) {
     printf("%-20s : %10s\n", p->name, p->phone);
     num++;
@@ -226,6 +227,7 @@ int delete(FILE *db_file, char *name) {
   entry *prev = NULL;
   entry *del = NULL ; /* Node to be deleted */
   int deleted = 0;
+  int count = 0;
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
       /* Matching node found. Delete it from the linked list.
@@ -240,14 +242,26 @@ int delete(FILE *db_file, char *name) {
       */
 
       /* TBD */
+      if(count == 0){ //first element
       del = p;
-      prev = del->next;
+      p = p->next;
+      del->next = NULL;
+      }
+      else if(count == (num-1)){ //last element
+        del = p;
+        prev->next = NULL;
+      }else{
+      del = p;
+      prev->next = del->next;
+      }
       deleted = 1;
+      break;
     }
     else{
       prev = p;
       p = p->next;
     }
+    count++;
   }
   write_all_entries(base);
   free_entries(base);
