@@ -252,8 +252,8 @@ int delete(FILE *db_file, char *name) {
       if(prev!=NULL){
        prev->next = p;
       }
-       del->next = NULL;
-     
+       del->next = del;
+      
        deleted = 1;
        break;
     }
