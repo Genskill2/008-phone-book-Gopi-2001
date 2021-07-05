@@ -66,8 +66,9 @@ int main(int argc, char *argv[]) {
       printf("NOT IMPLEMENTED!\n"); 
     }/* TBD  */
      FILE *fp = open_db_file();
-   char[] s =  search(fp,argv[2]);
-    printf("%s\n",s);
+    char *name = argv[2];
+    char *s =  search(fp,name);
+    printf("%s\n",*s);
     fclose(fp);
     exit(0); 
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
