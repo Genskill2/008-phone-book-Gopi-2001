@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     fclose(fp);
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
-    if(argc!=2){
+    if(argc!=3){
        print_usage("Improper arguments for search", argv[0]);
       exit(1);
     }/* TBD  */
@@ -109,7 +109,7 @@ void free_entries(entry *p) {
  
   free(p);
   
-  printf("Memory is not being freed. This needs to be fixed!\n");  
+  //printf("Memory is not being freed. This needs to be fixed!\n");  
 }
 
 void print_usage(char *message, char *progname) {
@@ -214,7 +214,7 @@ void list(FILE *db_file) {
     p=p->next;
   }
   /* TBD print total count */
-  printf("Total entries : %d\n",num);
+  printf("Total entries :  %d\n",num);
   free_entries(base);
 }
 
@@ -239,14 +239,18 @@ int delete(FILE *db_file, char *name) {
       */
 
       /* TBD */
-      p->next = p->next->next;
+      del = p;
+      prev = del->next;
       deleted = 1;
     }
     else{
+      prev = p;
       p = p->next;
     }
   }
   write_all_entries(base);
   free_entries(base);
+  free_entries(prev);
+  free_entries(del);
   return deleted;
 }
