@@ -63,12 +63,16 @@ int main(int argc, char *argv[]) {
     exit(0);
   } else if (strcmp(argv[1], "search") == 0) {  /* Handle search */
     if(argc!=2){
-      printf("NOT IMPLEMENTED!\n"); 
+       print_usage("Improper arguments for search", argv[0]);
+      exit(1);
     }/* TBD  */
-     FILE *fp = open_db_file();
+    FILE *fp = open_db_file();
     char *name = argv[2];
-    char *s =  search(fp,name);
-    printf("%s\n",s);
+    if (!search(fp, name)) {
+      printf("no match\n");
+      fclose(fp);
+      exit(1);
+    }
     fclose(fp);
     exit(0); 
   } else if (strcmp(argv[1], "delete") == 0) {  /* Handle delete */
@@ -185,16 +189,18 @@ void add(char *name, char *phone) {
   fprintf(fp, "%s,%s\n", name, phone);
   fclose(fp);
 }
-char *search(FILE *db_file,char *name){
+int search(FILE *db_file,char *name){
   entry *p = load_entries(db_file);
   entry *base = p;
+  int found = 0;
   while(p!=NULL){
   if(strcmp(p->name,name) == 0){
   printf("%s\n",p->phone);
-  break;
+  found = 1;
   }
   }
   free_entries(base);
+  return found;
 }
 
 void list(FILE *db_file) {
